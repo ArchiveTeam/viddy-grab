@@ -61,7 +61,8 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
     if (item_value_depth == "1" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/") == item_value)
       or (item_value_depth == "2" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/") == item_value2 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/") == item_value3)
       or (item_value_depth == "3" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_value5)
-      or string.match(url, shorturl) end then
+      or string.match(url, "/"..shorturl)
+      or string.match(url, "%-"..shorturl) then
       return true
       addedtolist[url] == true
     else
@@ -90,7 +91,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or (item_value_depth == "2" and string.match(customurl, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/") == item_value2 and string.match(customurl, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/") == item_value3)
           or (item_value_depth == "3" and string.match(customurl, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(customurl, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(customurl, "http[s]?://www%.viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_value5)
           or string.match(customurl, "/"..shorturl)
-          or string.match(customurl, "%-"..shorturl) then
+          or string.match(customurl, "%-"..shorturl)then
           if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
             table.insert(urls, { url=customurl })
             addedtolist[customurl] = true
