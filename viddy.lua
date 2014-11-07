@@ -61,8 +61,23 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
     if (item_value_depth == "1" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/") == item_value)
       or (item_value_depth == "2" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/") == item_value2 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/") == item_value3)
       or (item_value_depth == "3" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_value5)
-      or string.match(url, "/"..shorturl)
-      or string.match(url, "%-"..shorturl) then
+      or string.match(url, "viddy%.it/"..shorturl)
+      or string.match(url, "%-"..shorturl)
+      or string.match(url, "use%.typekit%.com")
+      or string.match(url, "p%.typekit%.com")
+      or string.match(url, "viddy%-assets%.com")
+      or string.match(url, "cdn%.viddy%.com")
+      or string.match(url, "livepassdl%.conviva%.com")
+      or string.match(url, "api%.mixpanel%.com")
+      or string.match(url, "gwa%.lphbs%.com")
+      or string.match(url, "gwc%.lphbs%.com")
+      or string.match(url, "gwd%.lphbs%.com")
+      or string.match(url, "cdn%.mxpnl%.com")
+      or string.match(url, "/resources/")
+      or string.match(url, "/images/")
+      or string.match(url, "/v1/")
+      or string.match(url, "/static/")
+      or string.match(url, "/ajax/") then
       return true
       addedtolist[url] == true
     else
@@ -78,32 +93,64 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
   local html = nil
         
   if item_type == "viddyvideo" then
-    if (item_value_depth == "1" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/") == item_value1)
-      or (item_value_depth == "2" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/") == item_value2 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/") == item_value3)
-      or (item_value_depth == "3" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_value5)
+    if (item_value_depth == "1" and string.match(url, "viddy%.com/([^/]+)/") == item_value1)
+      or (item_value_depth == "2" and string.match(url, "viddy%.com/([^/]+)/[^/]+/") == item_value2 and string.match(url, "viddy%.com/[^/]+/([^/]+)/") == item_value3)
+      or (item_value_depth == "3" and string.match(url, "viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(url, "viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(url, "viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_value5)
       or string.match(url, shorturl) then
       html = read_file(html)
       
       shorturl = string.match(html, '"http://viddy%.it/([^"]+)"')
       
       for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
-        if (item_value_depth == "1" and string.match(customurl, "http[s]?://www%.viddy%.com/([^/]+)/") == item_value1)
-          or (item_value_depth == "2" and string.match(customurl, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/") == item_value2 and string.match(customurl, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/") == item_value3)
-          or (item_value_depth == "3" and string.match(customurl, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(customurl, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(customurl, "http[s]?://www%.viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_value5)
-          or string.match(customurl, "/"..shorturl)
-          or string.match(customurl, "%-"..shorturl)then
+        if (item_value_depth == "1" and string.match(customurl, "viddy%.com/([^/]+)/") == item_value1)
+          or (item_value_depth == "2" and string.match(customurl, "viddy%.com/([^/]+)/[^/]+/") == item_value2 and string.match(customurl, "viddy%.com/[^/]+/([^/]+)/") == item_value3)
+          or (item_value_depth == "3" and string.match(customurl, "viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(customurl, "viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(customurl, "viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_value5)
+          or string.match(customurl, "viddy%.it/"..shorturl)
+          or string.match(customurl, "%-"..shorturl) 
+          or string.match(customurl, "use%.typekit%.com")
+          or string.match(customurl, "p%.typekit%.com")
+          or string.match(customurl, "viddy%-assets%.com")
+          or string.match(customurl, "cdn%.viddy%.com")
+          or string.match(customurl, "livepassdl%.conviva%.com")
+          or string.match(customurl, "api%.mixpanel%.com")
+          or string.match(customurl, "gwa%.lphbs%.com")
+          or string.match(customurl, "gwc%.lphbs%.com")
+          or string.match(customurl, "gwd%.lphbs%.com")
+          or string.match(customurl, "cdn%.mxpnl%.com")
+          or string.match(customurl, "/resources/")
+          or string.match(customurl, "/images/")
+          or string.match(customurl, "/v1/")
+          or string.match(customurl, "/static/")
+          or string.match(customurl, "/ajax/") then
           if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
             table.insert(urls, { url=customurl })
             addedtolist[customurl] = true
           end
         end
       end
-      for customurl in string.gmatch(html, '%((http[s]?://[^%)]+)%)') do
-        if (item_value_depth == "1" and string.match(customurl, "http[s]?://www%.viddy%.com/([^/]+)/") == item_value1)
-          or (item_value_depth == "2" and string.match(customurl, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/") == item_value2 and string.match(customurl, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/") == item_value3)
-          or (item_value_depth == "3" and string.match(customurl, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(customurl, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(customurl, "http[s]?://www%.viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_value5)
-          or string.match(customurl, "/"..shorturl)
-          or string.match(customurl, "%-"..shorturl) then
+      for customurlnf in string.gmatch(html, '"//([^"]+)"') do
+        if (item_value_depth == "1" and string.match(customurlnf, "viddy%.com/([^/]+)/") == item_value1)
+          or (item_value_depth == "2" and string.match(customurlnf, "viddy%.com/([^/]+)/[^/]+/") == item_value2 and string.match(customurlnf, "viddy%.com/[^/]+/([^/]+)/") == item_value3)
+          or (item_value_depth == "3" and string.match(customurlnf, "viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(customurlnf, "viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(customurlnf, "viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_value5)
+          or string.match(customurlnf, "viddy%.it/"..shorturl)
+          or string.match(customurlnf, "%-"..shorturl) 
+          or string.match(customurlnf, "use%.typekit%.com")
+          or string.match(customurlnf, "p%.typekit%.com")
+          or string.match(customurlnf, "viddy%-assets%.com")
+          or string.match(customurlnf, "cdn%.viddy%.com")
+          or string.match(customurlnf, "livepassdl%.conviva%.com")
+          or string.match(customurlnf, "api%.mixpanel%.com")
+          or string.match(customurlnf, "gwa%.lphbs%.com")
+          or string.match(customurlnf, "gwc%.lphbs%.com")
+          or string.match(customurlnf, "gwd%.lphbs%.com")
+          or string.match(customurlnf, "cdn%.mxpnl%.com")
+          or string.match(customurlnf, "/resources/")
+          or string.match(customurlnf, "/images/")
+          or string.match(customurlnf, "/v1/")
+          or string.match(customurlnf, "/static/")
+          or string.match(customurlnf, "/ajax/") then
+          local base = "http://"
+          local customurl = base..customurlnf
           if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
             table.insert(urls, { url=customurl })
             addedtolist[customurl] = true
@@ -113,7 +160,14 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       for customurlnf in string.gmatch(html, '"(/[^"]+)"') do
         if (item_value_depth == "1" and string.match(customurlnf, "/([^/]+)/") == item_value1)
           or (item_value_depth == "2" and string.match(customurlnf, "/([^/]+)/[^/]+/") == item_value2 and string.match(customurlnf, "/[^/]+/([^/]+)/") == item_value3)
-          or (item_value_depth == "3" and string.match(customurlnf, "/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(customurlnf, "/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(customurlnf, "/[^/]+/[^/]+/([^/]+)/") == item_value5) then
+          or (item_value_depth == "3" and string.match(customurlnf, "/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(customurlnf, "/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(customurlnf, "/[^/]+/[^/]+/([^/]+)/") == item_value5)
+          or string.match(customurlnf, "/"..shorturl)
+          or string.match(customurlnf, "%-"..shorturl) 
+          or string.match(customurlnf, "/resources/")
+          or string.match(customurlnf, "/images/")
+          or string.match(customurlnf, "/v1/")
+          or string.match(customurlnf, "/static/")
+          or string.match(customurlnf, "/ajax/") then
           local base = "http://www.viddy.com"
           local customurl = base..customurlnf
           if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
