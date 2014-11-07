@@ -47,20 +47,21 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
     return false
   end
   
---  if item_value_depth == "1" and string.match(url, "http[s]?://www.viddy.com/[^/]+/") and not item_value_1 then
---    item_value_1 = string.match(url, "http[s]?://www.viddy.com/([^/]+)/")
---  elseif item_value_depth == "2" and string.match(url, "http[s]?://www.viddy.com/[^/]+/[^/]+/") and not (item_value_2 and item_value_3) then
---    item_value_2 = string.match(url, "http[s]?://www.viddy.com/([^/]+)/[^/]+/")
---    item_value_3 = string.match(url, "http[s]?://www.viddy.com/[^/]+/([^/]+)/")
---  elseif item_value_depth == "3" and string.match(url, "http[s]?://www.viddy.com/[^/]+/[^/]+/[^/]+/") and not (item_value_2 and item_value_4 and item_value_5) then
---    item_value_2 = string.match(url, "http[s]?://www.viddy.com/([^/]+)/[^/]+/[^/]+/")
---    item_value_4 = string.match(url, "http[s]?://www.viddy.com/[^/]+/([^/]+)/[^/]+/")
---    item_value_5 = string.match(url, "http[s]?://www.viddy.com/[^/]+/[^/]+/([^/]+)/")
+--  if item_value_depth == "1" and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/") and not item_value_1 then
+--    item_value_1 = string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/")
+--  elseif item_value_depth == "2" and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/[^/]+/") and not (item_value_2 and item_value_3) then
+--    item_value_2 = string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/")
+--    item_value_3 = string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/")
+--  elseif item_value_depth == "3" and string.match(url, "http[s]?://www%.viddy.com/[^/]+/[^/]+/[^/]+/") and not (item_value_2 and item_value_4 and item_value_5) then
+--    item_value_2 = string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/[^/]+/")
+--    item_value_4 = string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/[^/]+/")
+--    item_value_5 = string.match(url, "http[s]?://www%.viddy%.com/[^/]+/[^/]+/([^/]+)/")
   
   if item_type == "viddyvideo" and (downloaded[url] ~= true or addedtolist[url] ~= true) then
-    if (item_value_depth == "1" and string.match(url, "http[s]?://www.viddy.com/([^/]+)/") == item_value)
-      or (item_value_depth == "2" and string.match(url, "http[s]?://www.viddy.com/([^/]+)/[^/]+/") == item_value2 and string.match(url, "http[s]?://www.viddy.com/[^/]+/([^/]+)/") == item_value3)
-      or (item_value_depth == "3" and string.match(url, "http[s]?://www.viddy.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(url, "http[s]?://www.viddy.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(url, "http[s]?://www.viddy.com/[^/]+/[^/]+/([^/]+)/") == item_value5) then
+    if (item_value_depth == "1" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/") == item_value)
+      or (item_value_depth == "2" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/") == item_value2 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/") == item_value3)
+      or (item_value_depth == "3" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_value5)
+      or string.match(url, shorturl) end then
       return true
       addedtolist[url] == true
     else
@@ -76,15 +77,20 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
   local html = nil
         
   if item_type == "viddyvideo" then
-    if (item_value_depth == "1" and string.match(url, "http[s]?://www.viddy.com/([^/]+)/") == item_value1)
-      or (item_value_depth == "2" and string.match(url, "http[s]?://www.viddy.com/([^/]+)/[^/]+/") == item_value2 and string.match(url, "http[s]?://www.viddy.com/[^/]+/([^/]+)/") == item_value3)
-      or (item_value_depth == "3" and string.match(url, "http[s]?://www.viddy.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(url, "http[s]?://www.viddy.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(url, "http[s]?://www.viddy.com/[^/]+/[^/]+/([^/]+)/") == item_value5) then
+    if (item_value_depth == "1" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/") == item_value1)
+      or (item_value_depth == "2" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/") == item_value2 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/") == item_value3)
+      or (item_value_depth == "3" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_value5)
+      or string.match(url, shorturl) then
       html = read_file(html)
       
+      shorturl = string.match(html, '"http://viddy%.it/([^"]+)"')
+      
       for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
-        if (item_value_depth == "1" and string.match(customurl, "http[s]?://www.viddy.com/([^/]+)/") == item_value1)
-          or (item_value_depth == "2" and string.match(customurl, "http[s]?://www.viddy.com/([^/]+)/[^/]+/") == item_value2 and string.match(customurl, "http[s]?://www.viddy.com/[^/]+/([^/]+)/") == item_value3)
-          or (item_value_depth == "3" and string.match(customurl, "http[s]?://www.viddy.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(customurl, "http[s]?://www.viddy.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(customurl, "http[s]?://www.viddy.com/[^/]+/[^/]+/([^/]+)/") == item_value5) then
+        if (item_value_depth == "1" and string.match(customurl, "http[s]?://www%.viddy%.com/([^/]+)/") == item_value1)
+          or (item_value_depth == "2" and string.match(customurl, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/") == item_value2 and string.match(customurl, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/") == item_value3)
+          or (item_value_depth == "3" and string.match(customurl, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(customurl, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(customurl, "http[s]?://www%.viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_value5)
+          or string.match(customurl, "/"..shorturl)
+          or string.match(customurl, "%-"..shorturl) then
           if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
             table.insert(urls, { url=customurl })
             addedtolist[customurl] = true
@@ -92,9 +98,11 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         end
       end
       for customurl in string.gmatch(html, '%((http[s]?://[^%)]+)%)') do
-        if (item_value_depth == "1" and string.match(customurl, "http[s]?://www.viddy.com/([^/]+)/") == item_value1)
-          or (item_value_depth == "2" and string.match(customurl, "http[s]?://www.viddy.com/([^/]+)/[^/]+/") == item_value2 and string.match(customurl, "http[s]?://www.viddy.com/[^/]+/([^/]+)/") == item_value3)
-          or (item_value_depth == "3" and string.match(customurl, "http[s]?://www.viddy.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(customurl, "http[s]?://www.viddy.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(customurl, "http[s]?://www.viddy.com/[^/]+/[^/]+/([^/]+)/") == item_value5) then
+        if (item_value_depth == "1" and string.match(customurl, "http[s]?://www%.viddy%.com/([^/]+)/") == item_value1)
+          or (item_value_depth == "2" and string.match(customurl, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/") == item_value2 and string.match(customurl, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/") == item_value3)
+          or (item_value_depth == "3" and string.match(customurl, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(customurl, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(customurl, "http[s]?://www%.viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_value5)
+          or string.match(customurl, "/"..shorturl)
+          or string.match(customurl, "%-"..shorturl) then
           if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
             table.insert(urls, { url=customurl })
             addedtolist[customurl] = true
@@ -138,7 +146,9 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
     end
   end
   
-  if status_code >= 500 or
+  if string.match(url["url"], "http[s]://viddy%.it/"..shorturl) then
+    return wget.actions.EXIT
+  elseif status_code >= 500 or
     (status_code >= 400 and status_code ~= 404 and status_code ~= 403) then
     io.stdout:write("\nServer returned "..http_stat.statcode..". Sleeping.\n")
     io.stdout:flush()
