@@ -47,20 +47,20 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
     return false
   end
   
-  if item_value_depth == "1" and string.match(url, "http[s]?://www.viddy.com/[^/]+/") and not item_value_1 then
-    item_value_1 = string.match(url, "http[s]?://www.viddy.com/([^/]+)/")
-  elseif item_value_depth == "2" and string.match(url, "http[s]?://www.viddy.com/[^/]+/[^/]+/") and not (item_value_2 and item_value_3) then
-    item_value_2 = string.match(url, "http[s]?://www.viddy.com/([^/]+)/[^/]+/")
-    item_value_3 = string.match(url, "http[s]?://www.viddy.com/[^/]+/([^/]+)/")
-  elseif item_value_depth == "3" and string.match(url, "http[s]?://www.viddy.com/[^/]+/[^/]+/[^/]+/") and not (item_value_2 and item_value_4 and item_value_5) then
-    item_value_2 = string.match(url, "http[s]?://www.viddy.com/([^/]+)/[^/]+/[^/]+/")
-    item_value_4 = string.match(url, "http[s]?://www.viddy.com/[^/]+/([^/]+)/[^/]+/")
-    item_value_5 = string.match(url, "http[s]?://www.viddy.com/[^/]+/[^/]+/([^/]+)/")
+--  if item_value_depth == "1" and string.match(url, "http[s]?://www.viddy.com/[^/]+/") and not item_value_1 then
+--    item_value_1 = string.match(url, "http[s]?://www.viddy.com/([^/]+)/")
+--  elseif item_value_depth == "2" and string.match(url, "http[s]?://www.viddy.com/[^/]+/[^/]+/") and not (item_value_2 and item_value_3) then
+--    item_value_2 = string.match(url, "http[s]?://www.viddy.com/([^/]+)/[^/]+/")
+--    item_value_3 = string.match(url, "http[s]?://www.viddy.com/[^/]+/([^/]+)/")
+--  elseif item_value_depth == "3" and string.match(url, "http[s]?://www.viddy.com/[^/]+/[^/]+/[^/]+/") and not (item_value_2 and item_value_4 and item_value_5) then
+--    item_value_2 = string.match(url, "http[s]?://www.viddy.com/([^/]+)/[^/]+/[^/]+/")
+--    item_value_4 = string.match(url, "http[s]?://www.viddy.com/[^/]+/([^/]+)/[^/]+/")
+--    item_value_5 = string.match(url, "http[s]?://www.viddy.com/[^/]+/[^/]+/([^/]+)/")
   
   if item_type == "viddyvideo" and (downloaded[url] ~= true or addedtolist[url] ~= true) then
-    if (item_value_depth == "1" and item_value_1 == item_value)
-      or (item_value_depth == "2" and item_value_2 == item_value2 and item_value_3 == item_value3)
-      or (item_value_depth == "3" and item_value_2 == item_value2 and item_value_4 == item_value4 and item_value_5 == item_value5) then
+    if (item_value_depth == "1" and string.match(url, "http[s]?://www.viddy.com/([^/]+)/") == item_value)
+      or (item_value_depth == "2" and string.match(url, "http[s]?://www.viddy.com/([^/]+)/[^/]+/") == item_value2 and string.match(url, "http[s]?://www.viddy.com/[^/]+/([^/]+)/") == item_value3)
+      or (item_value_depth == "3" and string.match(url, "http[s]?://www.viddy.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(url, "http[s]?://www.viddy.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(url, "http[s]?://www.viddy.com/[^/]+/[^/]+/([^/]+)/") == item_value5) then
       return true
       addedtolist[url] == true
     else
