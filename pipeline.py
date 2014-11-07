@@ -216,11 +216,17 @@ class WgetArgs(object):
                     wget_args.append('http://www.viddy.com/{0}/{1}'.format(item_value2, item_value3))
                     item_value_depth = '2'
                     item['item_value_depth'] = item_value_depth
+                    item_value4 = "not_used"
+                    item_value5 = "not_used"
                 
             else:
                 wget_args.append('http://www.viddy.com/{0}'.format(item_value))
                 item_value_depth = '1'
                 item['item_value_depth'] = item_value_depth
+                item_value2 = "not_used"
+                item_value3 = "not_used"
+                item_value4 = "not_used"
+                item_value5 = "not_used"
             
         else:
             raise Exception('Unknown item')
