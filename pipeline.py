@@ -15,6 +15,7 @@ import subprocess
 import sys
 import time
 import string
+import re
 
 import seesaw
 from seesaw.externalprocess import WgetDownload
@@ -200,15 +201,26 @@ class WgetArgs(object):
             if re.search(':', item_value):
                 assert ':' in item_value
                 item_value2, item_value3 = item_value.split(':', 1)
+                item['item_value2'] = item_value2
+                item['item_value3'] = item_value3
                 if re.search(':' item_value3):
-                    assert ':' in item_value
+                    assert ':' in item_value3
                     item_value4, item_value5 = item_value.split(':', 1)
                     wget_args.append('http://www.viddy.com/{0}/{1}/{2}'.format(item_value2, item_value4, item_value5))
+                    item['item_value4'] = item_value4
+                    item['item_value5'] = item_value5
+                    item_value_depth = '3'
+                    item['item_value_depth'] = item_value_depth
+                
                 else:
                     wget_args.append('http://www.viddy.com/{0}/{1}'.format(item_value2, item_value3))
+                    item_value_depth = '2'
+                    item['item_value_depth'] = item_value_depth
                 
             else:
                 wget_args.append('http://www.viddy.com/{0}'.format(item_value))
+                item_value_depth = '1'
+                item['item_value_depth'] = item_value_depth
             
         else:
             raise Exception('Unknown item')
@@ -250,6 +262,11 @@ pipeline = Pipeline(
         env={
             "item_dir": ItemValue("item_dir"),
             "item_value": ItemValue("item_value"),
+            "item_value2": ItemValue("item_value2"),
+            "item_value3": ItemValue("item_value3"),
+            "item_value4": ItemValue("item_value4"),
+            "item_value5": ItemValue("item_value5"),
+            "item_value_depth": ItemValue("item_value_depth"),
             "item_type": ItemValue("item_type"),
         }
     ),
