@@ -57,7 +57,7 @@ if not WGET_LUA:
 #
 # Update this each time you make a non-cosmetic change.
 # It will be added to the WARC files and reported to the tracker.
-VERSION = "20141112.04"
+VERSION = "20141112.05"
 USER_AGENT = 'ArchiveTeam'
 TRACKER_ID = 'viddy'
 TRACKER_HOST = 'tracker.archiveteam.org'
@@ -198,7 +198,7 @@ class WgetArgs(object):
         
         if item_type == 'viddyvideo2':
             item_url1, item_url2 = item_value.split(':', 1)
-            item_url3 = not_used
+            item_url3 = "not_used"
             wget_args.append('http://www.viddy.com/{0}/{1}'.format(item_url1, item_url2))
             item['item_url1'] = item_url1
             item['item_url2'] = item_url2
