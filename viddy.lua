@@ -93,9 +93,9 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
   local urls = {}
   local html = nil
         
-  if item_type == "viddyvideo2" or item_type == "viddyvideo3" then
+--  if item_type == "viddyvideo2" or item_type == "viddyvideo3" then
     if (item_type == "viddyvideo2" and string.match(url, "viddy%.com/media/"..item_url2))
-      or (item_type == "viddyvideo3" and string.match(url, "viddy%.com/"..item_url1.."/[vm]/"..item_url3)) then
+      or (item_type == "viddyvideo3" and string.match(url, item_url1) and string.match(url, item_url3)) then
       
       io.stdout:write("url "..url["url"].." is in.  \n")
       io.stdout:flush()
@@ -190,7 +190,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         end
       end
     end
-  end
+--  end
   
   return urls
 end
