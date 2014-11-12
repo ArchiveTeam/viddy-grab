@@ -76,10 +76,11 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
       if string.match(url, "https://") then
         newurl = string.gsub(url, "https://", "http://")
         addedtolist[newurl] = true
+        return true
       elseif string.match(url, "http://") then
         addedtolist[url] = true
+        return true
       end
-      return true
     else
       return false
     end
