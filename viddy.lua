@@ -103,7 +103,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       io.stdout:write("url "..url.." is in.  \n")
       io.stdout:flush()
       
-      html = read_file(html)
+      html = read_file(file)
       
       for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
         if (item_type == "viddyvideo2" and string.match(customurl, "viddy%.com/media/"..item_url2))
