@@ -121,6 +121,8 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurl, "/static/")
           or string.match(customurl, "/media/")
           or string.match(customurl, "/ajax/") then
+          io.stdout:write("url "..url.." is through ''.  \n")
+          io.stdout:flush()
           if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
             table.insert(urls, { url=customurl })
             if string.match(customurl, "https://") then
@@ -153,6 +155,8 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurlnf, "/static/")
           or string.match(customurlnf, "/media/")
           or string.match(customurlnf, "/ajax/") then
+          io.stdout:write("url "..url.." is through //.  \n")
+          io.stdout:flush()
           local base = "http://"
           local customurl = base..customurlnf
           if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
@@ -176,6 +180,8 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurlnf, "/static/")
           or string.match(customurlnf, "/media/")
           or string.match(customurlnf, "/ajax/") then
+          io.stdout:write("url "..url.." is through ().  \n")
+          io.stdout:flush()
           local base = "http://www.viddy.com"
           local customurl = base..customurlnf
           if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
