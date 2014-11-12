@@ -45,7 +45,13 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
     return false
   end
   
-  if (item_type == "viddyvideo2" or item_type == "viddyvideo3") and (downloaded[url] ~= true or addedtolist[url] ~= true) then
+  if string.match(url, "https://") then
+    newurl = string.gsub(url, "https://", "http://")
+  elseif string.match(url, "http://") then
+    newurl = url
+  end
+  
+  if (item_type == "viddyvideo2" or item_type == "viddyvideo3") and (downloaded[newurl] ~= true or addedtolist[newurl] ~= true) then
     if (item_value_depth == "viddyvideo2" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/") == item_url1 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/") == item_url2)
       or (item_value_depth == "viddyvideo3" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_url1 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_url2 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_url3)
       or string.match(url, "viddy%.it")
@@ -67,7 +73,12 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
       or string.match(url, "/static/")
       or string.match(url, "/media/")
       or string.match(url, "/ajax/") then
-      addedtolist[url] = true
+      if string.match(murl, "https://") then
+        newurl = string.gsub(url, "https://", "http://")
+        addedtolist[newurl] = true
+      elseif string.match(url, "http://") then
+        addedtolist[url] = true
+      end
       return true
     else
       return false
@@ -110,7 +121,12 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurl, "/ajax/") then
           if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
             table.insert(urls, { url=customurl })
-            addedtolist[customurl] = true
+            if string.match(customurl, "https://") then
+              newurl = string.gsub(customurl, "https://", "http://")
+              addedtolist[newurl] = true
+            elseif string.match(customurl, "http://") then
+              addedtolist[customurl] = true
+            end
           end
         end
       end
@@ -140,7 +156,12 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           local customurl = base..customurlnf
           if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
             table.insert(urls, { url=customurl })
-            addedtolist[customurl] = true
+            if string.match(customurl, "https://") then
+              newurl = string.gsub(customurl, "https://", "http://")
+              addedtolist[newurl] = true
+            elseif string.match(customurl, "http://") then
+              addedtolist[customurl] = true
+            end
           end
         end
       end
@@ -159,7 +180,12 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           local customurl = base..customurlnf
           if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
             table.insert(urls, { url=customurl })
-            addedtolist[customurl] = true
+            if string.match(customurl, "https://") then
+              newurl = string.gsub(customurl, "https://", "http://")
+              addedtolist[newurl] = true
+            elseif string.match(customurl, "http://") then
+              addedtolist[customurl] = true
+            end
           end
         end
       end
@@ -180,11 +206,11 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
   io.stdout:flush()
   
   if (status_code >= 200 and status_code <= 399) or status_code == 403 then
-    if string.match(url.url, "https://") then
-      local newurl = string.gsub(url.url, "https://", "http://")
+    if string.match(url["url"], "https://") then
+      local newurl = string.gsub(url["url"], "https://", "http://")
       downloaded[newurl] = true
     else
-      downloaded[url.url] = true
+      downloaded[url["url"]] = true
     end
   end
   
