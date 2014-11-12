@@ -94,13 +94,14 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
   local html = nil
         
   if item_type == "viddyvideo2" or item_type == "viddyvideo3" then
-    if (string.match(url, item_url1) and string.match(url, item_url2)) or (string.match(url, item_url1) and string.match(url, item_url2) and string.match(url, item_url3)) then
+    if string.match(url, "%.com/media/")
+      or string.match(url, "%.com/[^/]+/m/")
+      or string.match(url, "%.com/[^/]+/v/") then
       
       html = read_file(file)
       
       for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
-        if (string.match(customurl, item_url1) and string.match(customurl, item_url2)) or (string.match(customurl, item_url1) and string.match(customurl, item_url2) and string.match(customurl, item_url3))
-          or string.match(customurl, "viddy%.it")
+        if string.match(customurl, "viddy%.it")
           or string.match(customurl, "viddy%.com/[^/]+/v/")
           or string.match(customurl, "viddy%.com/[^/]+/m/")
           or string.match(customurl, "use%.typekit%.com")
@@ -131,8 +132,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         end
       end
       for customurlnf in string.gmatch(html, '"//([^"]+)"') do
-        if (string.match(customurlnf, item_url1) and string.match(customurlnf, item_url2)) or (string.match(customurlnf, item_url1) and string.match(customurlnf, item_url2) and string.match(customurlnf, item_url3))
-          or string.match(customurlnf, "viddy%.it")
+        if string.match(customurlnf, "viddy%.it")
           or string.match(customurlnf, "viddy%.com/[^/]+/v/")
           or string.match(customurlnf, "viddy%.com/[^/]+/m/")
           or string.match(customurlnf, "use%.typekit%.com")
@@ -165,8 +165,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         end
       end
       for customurlnf in string.gmatch(html, '"(/[^"]+)"') do
-        if (string.match(customurlnf, item_url1) and string.match(customurlnf, item_url2)) or (string.match(customurlnf, item_url1) and string.match(customurlnf, item_url2) and string.match(customurlnf, item_url3))
-          or string.match(customurlnf, "/[^/]+/v/")
+        if string.match(customurlnf, "/[^/]+/v/")
           or string.match(customurlnf, "/[^/]+/m/")
           or string.match(customurlnf, "/resources/")
           or string.match(customurlnf, "/images/")
