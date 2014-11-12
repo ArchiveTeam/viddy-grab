@@ -97,7 +97,8 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
   io.stdout:flush()
         
 --  if item_type == "viddyvideo2" or item_type == "viddyvideo3" then
-    if (string.match(url, item_url1) and string.match(url, item_url2)) or (string.match(url, item_url1) and string.match(url, item_url2) and string.match(url, item_url3)) then
+    if (item_type == "viddyvideo2" and string.match(url, "viddy%.com/media/"..item_url2))
+      or (item_type == "viddyvideo3" and string.match(url, item_url1) and string.match(url, item_url3)) then
       
       io.stdout:write("url "..url.." is in.  \n")
       io.stdout:flush()
