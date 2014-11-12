@@ -194,35 +194,23 @@ class WgetArgs(object):
         item['item_type'] = item_type
         item['item_value'] = item_value
         
-        assert item_type in ("viddyvideo")
-        item_value_depth = item_name.count(":")
-        item['item_value_depth'] = item_value_depth
+        assert item_type in ("viddyvideo2, viddyvideo3")
         
-        if item_type == 'viddyvideo' and item_value_depth == 1:
-            wget_args.append('http://www.viddy.com/{0}'.format(item_value))
-            item_value2 = "not_used"
-            item_value3 = "not_used"
-            item_value4 = "not_used"
-            item_value5 = "not_used"
-        elif item_type == 'viddyvideo' and item_value_depth == 2:
-            assert ':' in item_value
-            item_value2, item_value3 = item_value.split(':', 1)
-            wget_args.append('http://www.viddy.com/{0}/{1}'.format(item_value2, item_value3))
-            item_value4 = "not_used"
-            item_value5 = "not_used"
-        elif item_type == 'viddyvideo' and item_value_depth == 3:
-            assert ':' in item_value
-            item_value2, item_value3 = item_value.split(':', 1)
-            assert ':' in item_value3
-            item_value4, item_value5 = item_value.split(':', 1)
-            wget_args.append('http://www.viddy.com/{0}/{1}/{2}'.format(item_value2, item_value4, item_value5))
+        if item_type == 'viddyvideo2':
+            item_url1, item_url2 = item_value.split(':', 1)
+            item_url3 = not_used
+            wget_args.append('http://www.viddy.com/{0}/{1}'.format(item_url1, item_url2))
+            item['item_url1'] = item_url1
+            item['item_url2'] = item_url2
+            item['item_url3'] = item_url3
+        elif item_type == 'viddyvideo3':
+            item_url1, item_url2, item_url3 = item_value.split(':', 2)
+            wget_args.append('http://www.viddy.com/{0}/{1}/{2}'.format(item_url1, item_url2, item_url3))
+            item['item_url1'] = item_url1
+            item['item_url2'] = item_url2
+            item['item_url3'] = item_url3
         else:
             raise Exception('Unknown item')
-        
-        item['item_value2'] = item_value2
-        item['item_value3'] = item_value3
-        item['item_value4'] = item_value4
-        item['item_value5'] = item_value5
         
         if 'bind_address' in globals():
             wget_args.extend(['--bind-address', globals()['bind_address']])
@@ -261,11 +249,9 @@ pipeline = Pipeline(
         env={
             "item_dir": ItemValue("item_dir"),
             "item_value": ItemValue("item_value"),
-            "item_value2": ItemValue("item_value2"),
-            "item_value3": ItemValue("item_value3"),
-            "item_value4": ItemValue("item_value4"),
-            "item_value5": ItemValue("item_value5"),
-            "item_value_depth": ItemValue("item_value_depth"),
+            "item_url1": ItemValue("item_url1"),
+            "item_url2": ItemValue("item_url2"),
+            "item_url3": ItemValue("item_url3"),
             "item_type": ItemValue("item_type"),
         }
     ),
