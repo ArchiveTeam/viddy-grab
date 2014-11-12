@@ -6,11 +6,9 @@ local url_count = 0
 local tries = 0
 local item_type = os.getenv('item_type')
 local item_value = os.getenv('item_value')
-local item_value2 = os.getenv('item_value2')
-local item_value3 = os.getenv('item_value3')
-local item_value4 = os.getenv('item_value4')
-local item_value5 = os.getenv('item_value5')
-local item_value_depth = os.getenv('item_value_depth')
+local item_url1 = os.getenv('item_url1')
+local item_url2 = os.getenv('item_url2')
+local item_url3 = os.getenv('item_url3')
 
 local downloaded = {}
 local addedtolist = {}
@@ -47,20 +45,9 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
     return false
   end
   
---  if item_value_depth == "1" and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/") and not item_value_1 then
---    item_value_1 = string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/")
---  elseif item_value_depth == "2" and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/[^/]+/") and not (item_value_2 and item_value_3) then
---    item_value_2 = string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/")
---    item_value_3 = string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/")
---  elseif item_value_depth == "3" and string.match(url, "http[s]?://www%.viddy.com/[^/]+/[^/]+/[^/]+/") and not (item_value_2 and item_value_4 and item_value_5) then
---    item_value_2 = string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/[^/]+/")
---    item_value_4 = string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/[^/]+/")
---    item_value_5 = string.match(url, "http[s]?://www%.viddy%.com/[^/]+/[^/]+/([^/]+)/")
-  
-  if item_type == "viddyvideo" and (downloaded[url] ~= true or addedtolist[url] ~= true) then
-    if (item_value_depth == "1" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/") == item_value)
-      or (item_value_depth == "2" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/") == item_value2 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/") == item_value3)
-      or (item_value_depth == "3" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_value5)
+  if (item_type == "viddyvideo2" or item_type == "viddyvideo3") and (downloaded[url] ~= true or addedtolist[url] ~= true) then
+    if (item_value_depth == "viddyvideo2" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/") == item_url1 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/") == item_url2)
+      or (item_value_depth == "viddyvideo3" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_url1 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_url2 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_url3)
       or string.match(url, "viddy%.it/"..shorturl)
       or string.match(url, "%-"..shorturl)
       or string.match(url, "use%.typekit%.com")
@@ -92,19 +79,17 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
   local urls = {}
   local html = nil
         
-  if item_type == "viddyvideo" then
-    if (item_value_depth == "1" and string.match(url, "viddy%.com/([^/]+)/") == item_value1)
-      or (item_value_depth == "2" and string.match(url, "viddy%.com/([^/]+)/[^/]+/") == item_value2 and string.match(url, "viddy%.com/[^/]+/([^/]+)/") == item_value3)
-      or (item_value_depth == "3" and string.match(url, "viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(url, "viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(url, "viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_value5)
+  if item_type == "viddyvideo2" or item_type == "viddyvideo3" then
+    if (item_value_depth == "viddyvideo2" and string.match(url, "viddy%.com/([^/]+)/[^/]+/") == item_url1 and string.match(url, "viddy%.com/[^/]+/([^/]+)/") == item_url2)
+      or (item_value_depth == "viddyvideo3" and string.match(url, "viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_url1 and string.match(url, "viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_url2 and string.match(url, "viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_url3)
       or string.match(url, shorturl) then
       html = read_file(html)
       
       shorturl = string.match(html, '"http://viddy%.it/([^"]+)"')
       
       for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
-        if (item_value_depth == "1" and string.match(customurl, "viddy%.com/([^/]+)/") == item_value1)
-          or (item_value_depth == "2" and string.match(customurl, "viddy%.com/([^/]+)/[^/]+/") == item_value2 and string.match(customurl, "viddy%.com/[^/]+/([^/]+)/") == item_value3)
-          or (item_value_depth == "3" and string.match(customurl, "viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(customurl, "viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(customurl, "viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_value5)
+        if (item_value_depth == "viddyvideo2" and string.match(customurl, "viddy%.com/([^/]+)/[^/]+/") == item_url1 and string.match(customurl, "viddy%.com/[^/]+/([^/]+)/") == item_url2)
+          or (item_value_depth == "viddyvideo3" and string.match(customurl, "viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_url1 and string.match(customurl, "viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_url2 and string.match(customurl, "viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_url3)
           or string.match(customurl, "viddy%.it/"..shorturl)
           or string.match(customurl, "%-"..shorturl) 
           or string.match(customurl, "use%.typekit%.com")
@@ -129,9 +114,8 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         end
       end
       for customurlnf in string.gmatch(html, '"//([^"]+)"') do
-        if (item_value_depth == "1" and string.match(customurlnf, "viddy%.com/([^/]+)/") == item_value1)
-          or (item_value_depth == "2" and string.match(customurlnf, "viddy%.com/([^/]+)/[^/]+/") == item_value2 and string.match(customurlnf, "viddy%.com/[^/]+/([^/]+)/") == item_value3)
-          or (item_value_depth == "3" and string.match(customurlnf, "viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(customurlnf, "viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(customurlnf, "viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_value5)
+        if (item_value_depth == "viddyvideo2" and string.match(customurlnf, "viddy%.com/([^/]+)/[^/]+/") == item_url1 and string.match(customurlnf, "viddy%.com/[^/]+/([^/]+)/") == item_url2)
+          or (item_value_depth == "viddyvideo3" and string.match(customurlnf, "viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_url1 and string.match(customurlnf, "viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_url2 and string.match(customurlnf, "viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_url3)
           or string.match(customurlnf, "viddy%.it/"..shorturl)
           or string.match(customurlnf, "%-"..shorturl) 
           or string.match(customurlnf, "use%.typekit%.com")
@@ -158,9 +142,8 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         end
       end
       for customurlnf in string.gmatch(html, '"(/[^"]+)"') do
-        if (item_value_depth == "1" and string.match(customurlnf, "/([^/]+)/") == item_value1)
-          or (item_value_depth == "2" and string.match(customurlnf, "/([^/]+)/[^/]+/") == item_value2 and string.match(customurlnf, "/[^/]+/([^/]+)/") == item_value3)
-          or (item_value_depth == "3" and string.match(customurlnf, "/([^/]+)/[^/]+/[^/]+/") == item_value2 and string.match(customurlnf, "/[^/]+/([^/]+)/[^/]+/") == item_value4 and string.match(customurlnf, "/[^/]+/[^/]+/([^/]+)/") == item_value5)
+        if (item_value_depth == "viddyvideo2" and string.match(customurlnf, "/([^/]+)/[^/]+/") == item_url1 and string.match(customurlnf, "/[^/]+/([^/]+)/") == item_url2)
+          or (item_value_depth == "viddyvideo3" and string.match(customurlnf, "/([^/]+)/[^/]+/[^/]+/") == item_url1 and string.match(customurlnf, "/[^/]+/([^/]+)/[^/]+/") == item_url2 and string.match(customurlnf, "/[^/]+/[^/]+/([^/]+)/") == item_url3)
           or string.match(customurlnf, "/"..shorturl)
           or string.match(customurlnf, "%-"..shorturl) 
           or string.match(customurlnf, "/resources/")
