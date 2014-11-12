@@ -15,7 +15,6 @@ import subprocess
 import sys
 import time
 import string
-import re
 
 import seesaw
 from seesaw.externalprocess import WgetDownload
