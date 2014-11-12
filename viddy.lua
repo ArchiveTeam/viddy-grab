@@ -65,8 +65,10 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
       or string.match(url, "/v1/")
       or string.match(url, "/static/")
       or string.match(url, "/ajax/") then
-      return true
-      addedtolist[url] == true
+      if not string.match(url, "//////") then
+        addedtolist[url] == true
+        return true
+      end
     else
       return false
     end
