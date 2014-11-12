@@ -53,6 +53,7 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
   
   if (item_type == "viddyvideo2" or item_type == "viddyvideo3") and (downloaded[newurl] ~= true or addedtolist[newurl] ~= true) then
     if (item_type == "viddyvideo2" and string.match(url, "viddy%.com/media/"..item_url2))
+      or (item_type == "viddyvideo2" and string.match(url, "viddy%.com/video/"..item_url2))
       or (item_type == "viddyvideo3" and string.match(url, "viddy%.com/"..item_url1.."/[vm]/"..item_url3))
       or string.match(url, "viddy%.it")
       or string.match(url, "viddy%.com/[^/]+/v/")
@@ -72,6 +73,7 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
       or string.match(url, "/v1/")
       or string.match(url, "/static/")
       or string.match(url, "/media/")
+      or string.match(url, "/video/")
       or string.match(url, "/ajax/") then
       if string.match(url, "https://") then
         newurl = string.gsub(url, "https://", "http://")
@@ -95,6 +97,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         
   if item_type == "viddyvideo2" or item_type == "viddyvideo3" then
     if string.match(url, "%.com/media/")
+      or string.match(url, "%.com/video/")
       or string.match(url, "%.com/[^/]+/m/")
       or string.match(url, "%.com/[^/]+/v/") then
       
@@ -102,6 +105,14 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       
       io.stdout:write("Url "..url.." is being checked for extracting links.  \n")
       io.stdout:flush()
+      
+      if string.match(url, "viddy%.com/media/") then
+        local newurl = string.gsub(url, "viddy%.com/media/", "viddy%.com/video/")
+        if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
+          table.indert(urls, { url=newurl })
+          addedtolist[newurl] = true
+        end
+      end
       
       for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
         if string.match(customurl, "viddy%.it")
@@ -122,6 +133,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurl, "/v1/")
           or string.match(customurl, "/static/")
           or string.match(customurl, "/media/")
+          or string.match(customurl, "/video/")
           or string.match(customurl, "/ajax/") then
           if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
             table.insert(urls, { url=customurl })
@@ -153,6 +165,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurlnf, "/v1/")
           or string.match(customurlnf, "/static/")
           or string.match(customurlnf, "/media/")
+          or string.match(customurlnf, "/video/")
           or string.match(customurlnf, "/ajax/") then
           local base = "http://"
           local customurl = base..customurlnf
@@ -175,6 +188,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurlnf, "/v1/")
           or string.match(customurlnf, "/static/")
           or string.match(customurlnf, "/media/")
+          or string.match(customurlnf, "/video/")
           or string.match(customurlnf, "/ajax/") then
           local base = "http://www.viddy.com"
           local customurl = base..customurlnf
