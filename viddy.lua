@@ -106,7 +106,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       io.stdout:write("Url "..url.." is being checked for extracting links.  \n")
       io.stdout:flush()
       
-      if string.match(url, "viddy%.com/media/") and not string.match(url, "cdn%.viddy%.com" then
+      if string.match(url, "viddy%.com/media/") and not string.match(url, "cdn%.viddy%.com") then
         local newurl = string.gsub(url, "viddy%.com/media/", "viddy%.com/video/")
         if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
           table.insert(urls, { url=newurl })
