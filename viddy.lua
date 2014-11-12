@@ -52,7 +52,8 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
   end
   
   if (item_type == "viddyvideo2" or item_type == "viddyvideo3") and (downloaded[newurl] ~= true or addedtolist[newurl] ~= true) then
-    if (string.match(url, item_url1) and string.match(url, item_url2)) or (string.match(url, item_url1) and string.match(url, item_url2) and string.match(url, item_url3))
+    if (item_type == "viddyvideo2" and string.match(url, "viddy%.com/media/"..item_url2))
+      or (item_type == "viddyvideo3" and string.match(url, "viddy%.com/"..item_url1.."/[vm]/"..item_url3))
       or string.match(url, "viddy%.it")
       or string.match(url, "viddy%.com/[^/]+/v/")
       or string.match(url, "viddy%.com/[^/]+/m/")
@@ -91,6 +92,9 @@ end
 wget.callbacks.get_urls = function(file, url, is_css, iri)
   local urls = {}
   local html = nil
+  
+  io.stdout:write("url "..url.." is being checked.  \n")
+  io.stdout:flush()
         
 --  if item_type == "viddyvideo2" or item_type == "viddyvideo3" then
     if (string.match(url, item_url1) and string.match(url, item_url2)) or (string.match(url, item_url1) and string.match(url, item_url2) and string.match(url, item_url3)) then
@@ -101,7 +105,8 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       html = read_file(html)
       
       for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
-        if (string.match(customurl, item_url1) and string.match(customurl, item_url2)) or (string.match(customurl, item_url1) and string.match(customurl, item_url2) and string.match(customurl, item_url3))
+        if (item_type == "viddyvideo2" and string.match(customurl, "viddy%.com/media/"..item_url2))
+          or (item_type == "viddyvideo3" and string.match(customurl, "viddy%.com/"..item_url1.."/[vm]/"..item_url3))
           or string.match(customurl, "viddy%.it")
           or string.match(customurl, "viddy%.com/[^/]+/v/")
           or string.match(customurl, "viddy%.com/[^/]+/m/")
@@ -133,7 +138,8 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         end
       end
       for customurlnf in string.gmatch(html, '"//([^"]+)"') do
-        if (string.match(customurlnf, item_url1) and string.match(customurlnf, item_url2)) or (string.match(customurlnf, item_url1) and string.match(customurlnf, item_url2) and string.match(customurlnf, item_url3))
+        if (item_type == "viddyvideo2" and string.match(customurlnf, "viddy%.com/media/"..item_url2))
+          or (item_type == "viddyvideo3" and string.match(customurlnf, "viddy%.com/"..item_url1.."/[vm]/"..item_url3))
           or string.match(customurlnf, "viddy%.it")
           or string.match(customurlnf, "viddy%.com/[^/]+/v/")
           or string.match(customurlnf, "viddy%.com/[^/]+/m/")
@@ -167,7 +173,8 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         end
       end
       for customurlnf in string.gmatch(html, '"(/[^"]+)"') do
-        if (string.match(customurlnf, item_url1) and string.match(customurlnf, item_url2)) or (string.match(customurlnf, item_url1) and string.match(customurlnf, item_url2) and string.match(customurlnf, item_url3))
+        if (item_type == "viddyvideo2" and string.match(customurlnf, "/media/"..item_url2))
+          or (item_type == "viddyvideo3" and string.match(customurlnf, "/"..item_url1.."/[vm]/"..item_url3))
           or string.match(customurlnf, "/[^/]+/v/")
           or string.match(customurlnf, "/[^/]+/m/")
           or string.match(customurlnf, "/resources/")
