@@ -196,40 +196,34 @@ class WgetArgs(object):
         item['item_value'] = item_value
         
         assert item_type in ("viddyvideo")
+        item_value_depth = item_name.count(":")
+        item['item_value_depth'] = item_value_depth
         
-        if item_type == 'viddyvideo':
-            if re.search(':', item_value):
-                assert ':' in item_value
-                item_value2, item_value3 = item_value.split(':', 1)
-                item['item_value2'] = item_value2
-                item['item_value3'] = item_value3
-                if re.search(':' item_value3):
-                    assert ':' in item_value3
-                    item_value4, item_value5 = item_value.split(':', 1)
-                    wget_args.append('http://www.viddy.com/{0}/{1}/{2}'.format(item_value2, item_value4, item_value5))
-                    item['item_value4'] = item_value4
-                    item['item_value5'] = item_value5
-                    item_value_depth = '3'
-                    item['item_value_depth'] = item_value_depth
-                
-                else:
-                    wget_args.append('http://www.viddy.com/{0}/{1}'.format(item_value2, item_value3))
-                    item_value_depth = '2'
-                    item['item_value_depth'] = item_value_depth
-                    item_value4 = "not_used"
-                    item_value5 = "not_used"
-                
-            else:
-                wget_args.append('http://www.viddy.com/{0}'.format(item_value))
-                item_value_depth = '1'
-                item['item_value_depth'] = item_value_depth
-                item_value2 = "not_used"
-                item_value3 = "not_used"
-                item_value4 = "not_used"
-                item_value5 = "not_used"
-            
+        if item_type == 'viddyvideo' and item_value_depth == 1:
+            wget_args.append('http://www.viddy.com/{0}'.format(item_value))
+            item_value2 = "not_used"
+            item_value3 = "not_used"
+            item_value4 = "not_used"
+            item_value5 = "not_used"
+        elif item_type == 'viddyvideo' and item_value_depth == 2:
+            assert ':' in item_value
+            item_value2, item_value3 = item_value.split(':', 1)
+            wget_args.append('http://www.viddy.com/{0}/{1}'.format(item_value2, item_value3))
+            item_value4 = "not_used"
+            item_value5 = "not_used"
+        elif item_type == 'viddyvideo' and item_value_depth == 3:
+            assert ':' in item_value
+            item_value2, item_value3 = item_value.split(':', 1)
+            assert ':' in item_value3
+            item_value4, item_value5 = item_value.split(':', 1)
+            wget_args.append('http://www.viddy.com/{0}/{1}/{2}'.format(item_value2, item_value4, item_value5))
         else:
             raise Exception('Unknown item')
+        
+        item['item_value2'] = item_value2
+        item['item_value3'] = item_value3
+        item['item_value4'] = item_value4
+        item['item_value5'] = item_value5
         
         if 'bind_address' in globals():
             wget_args.extend(['--bind-address', globals()['bind_address']])
