@@ -121,13 +121,12 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurl, "/media/")
           or string.match(customurl, "/ajax/") then
           if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
+            table.insert(urls, { url=customurl })
             if string.match(customurl, "https://") then
               newurl = string.gsub(customurl, "https://", "http://")
               addedtolist[newurl] = true
-              table.insert(urls, { url=newurl })
             elseif string.match(customurl, "http://") then
               addedtolist[customurl] = true
-              table.insert(urls, { url=customurl })
             end
           end
         end
@@ -157,13 +156,12 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           local base = "http://"
           local customurl = base..customurlnf
           if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
+            table.insert(urls, { url=customurl })
             if string.match(customurl, "https://") then
               newurl = string.gsub(customurl, "https://", "http://")
               addedtolist[newurl] = true
-              table.insert(urls, { url=newurl })
             elseif string.match(customurl, "http://") then
               addedtolist[customurl] = true
-              table.insert(urls, { url=customurl })
             end
           end
         end
@@ -182,14 +180,8 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           local base = "http://www.viddy.com"
           local customurl = base..customurlnf
           if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
-            if string.match(customurl, "https://") then
-              newurl = string.gsub(customurl, "https://", "http://")
-              addedtolist[newurl] = true
-              table.insert(urls, { url=newurl })
-            elseif string.match(customurl, "http://") then
-              addedtolist[customurl] = true
-              table.insert(urls, { url=customurl })
-            end
+            table.insert(urls, { url=customurl })
+            addedtolist[customurl] = true
           end
         end
       end
