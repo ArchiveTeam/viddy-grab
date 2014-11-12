@@ -73,7 +73,7 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
       or string.match(url, "/static/")
       or string.match(url, "/media/")
       or string.match(url, "/ajax/") then
-      if string.match(murl, "https://") then
+      if string.match(url, "https://") then
         newurl = string.gsub(url, "https://", "http://")
         addedtolist[newurl] = true
       elseif string.match(url, "http://") then
