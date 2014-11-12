@@ -48,8 +48,9 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
   if (item_type == "viddyvideo2" or item_type == "viddyvideo3") and (downloaded[url] ~= true or addedtolist[url] ~= true) then
     if (item_value_depth == "viddyvideo2" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/") == item_url1 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/") == item_url2)
       or (item_value_depth == "viddyvideo3" and string.match(url, "http[s]?://www%.viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_url1 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_url2 and string.match(url, "http[s]?://www%.viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_url3)
-      or string.match(url, "viddy%.it/"..shorturl)
-      or string.match(url, "%-"..shorturl)
+      or string.match(url, "viddy%.it")
+      or string.match(url, "viddy%.com/[^/]+/v/")
+      or string.match(url, "viddy%.com/[^/]+/m/")
       or string.match(url, "use%.typekit%.com")
       or string.match(url, "p%.typekit%.com")
       or string.match(url, "viddy%-assets%.com")
@@ -64,6 +65,7 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
       or string.match(url, "/images/")
       or string.match(url, "/v1/")
       or string.match(url, "/static/")
+      or string.match(url, "/media/")
       or string.match(url, "/ajax/") then
       addedtolist[url] = true
       return true
@@ -81,17 +83,15 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         
   if item_type == "viddyvideo2" or item_type == "viddyvideo3" then
     if (item_value_depth == "viddyvideo2" and string.match(url, "viddy%.com/([^/]+)/[^/]+/") == item_url1 and string.match(url, "viddy%.com/[^/]+/([^/]+)/") == item_url2)
-      or (item_value_depth == "viddyvideo3" and string.match(url, "viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_url1 and string.match(url, "viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_url2 and string.match(url, "viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_url3)
-      or string.match(url, shorturl) then
+      or (item_value_depth == "viddyvideo3" and string.match(url, "viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_url1 and string.match(url, "viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_url2 and string.match(url, "viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_url3) then
       html = read_file(html)
-      
-      shorturl = string.match(html, '"http://viddy%.it/([^"]+)"')
       
       for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
         if (item_value_depth == "viddyvideo2" and string.match(customurl, "viddy%.com/([^/]+)/[^/]+/") == item_url1 and string.match(customurl, "viddy%.com/[^/]+/([^/]+)/") == item_url2)
           or (item_value_depth == "viddyvideo3" and string.match(customurl, "viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_url1 and string.match(customurl, "viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_url2 and string.match(customurl, "viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_url3)
-          or string.match(customurl, "viddy%.it/"..shorturl)
-          or string.match(customurl, "%-"..shorturl) 
+          or string.match(customurl, "viddy%.it")
+          or string.match(customurl, "viddy%.com/[^/]+/v/")
+          or string.match(customurl, "viddy%.com/[^/]+/m/")
           or string.match(customurl, "use%.typekit%.com")
           or string.match(customurl, "p%.typekit%.com")
           or string.match(customurl, "viddy%-assets%.com")
@@ -106,6 +106,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurl, "/images/")
           or string.match(customurl, "/v1/")
           or string.match(customurl, "/static/")
+          or string.match(customurl, "/media/")
           or string.match(customurl, "/ajax/") then
           if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
             table.insert(urls, { url=customurl })
@@ -116,8 +117,9 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       for customurlnf in string.gmatch(html, '"//([^"]+)"') do
         if (item_value_depth == "viddyvideo2" and string.match(customurlnf, "viddy%.com/([^/]+)/[^/]+/") == item_url1 and string.match(customurlnf, "viddy%.com/[^/]+/([^/]+)/") == item_url2)
           or (item_value_depth == "viddyvideo3" and string.match(customurlnf, "viddy%.com/([^/]+)/[^/]+/[^/]+/") == item_url1 and string.match(customurlnf, "viddy%.com/[^/]+/([^/]+)/[^/]+/") == item_url2 and string.match(customurlnf, "viddy%.com/[^/]+/[^/]+/([^/]+)/") == item_url3)
-          or string.match(customurlnf, "viddy%.it/"..shorturl)
-          or string.match(customurlnf, "%-"..shorturl) 
+          or string.match(customurlnf, "viddy%.it")
+          or string.match(customurlnf, "viddy%.com/[^/]+/v/")
+          or string.match(customurlnf, "viddy%.com/[^/]+/m/")
           or string.match(customurlnf, "use%.typekit%.com")
           or string.match(customurlnf, "p%.typekit%.com")
           or string.match(customurlnf, "viddy%-assets%.com")
@@ -132,6 +134,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurlnf, "/images/")
           or string.match(customurlnf, "/v1/")
           or string.match(customurlnf, "/static/")
+          or string.match(customurlnf, "/media/")
           or string.match(customurlnf, "/ajax/") then
           local base = "http://"
           local customurl = base..customurlnf
@@ -144,12 +147,13 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       for customurlnf in string.gmatch(html, '"(/[^"]+)"') do
         if (item_value_depth == "viddyvideo2" and string.match(customurlnf, "/([^/]+)/[^/]+/") == item_url1 and string.match(customurlnf, "/[^/]+/([^/]+)/") == item_url2)
           or (item_value_depth == "viddyvideo3" and string.match(customurlnf, "/([^/]+)/[^/]+/[^/]+/") == item_url1 and string.match(customurlnf, "/[^/]+/([^/]+)/[^/]+/") == item_url2 and string.match(customurlnf, "/[^/]+/[^/]+/([^/]+)/") == item_url3)
-          or string.match(customurlnf, "/"..shorturl)
-          or string.match(customurlnf, "%-"..shorturl) 
+          or string.match(customurlnf, "/[^/]+/v/")
+          or string.match(customurlnf, "/[^/]+/m/")
           or string.match(customurlnf, "/resources/")
           or string.match(customurlnf, "/images/")
           or string.match(customurlnf, "/v1/")
           or string.match(customurlnf, "/static/")
+          or string.match(customurlnf, "/media/")
           or string.match(customurlnf, "/ajax/") then
           local base = "http://www.viddy.com"
           local customurl = base..customurlnf
@@ -184,7 +188,7 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
     end
   end
   
-  if string.match(url["url"], "http[s]://viddy%.it/"..shorturl) then
+  if string.match(url["url"], "http[s]://viddy%.it/") then
     return wget.actions.EXIT
   elseif status_code >= 500 or
     (status_code >= 400 and status_code ~= 404 and status_code ~= 403) then
