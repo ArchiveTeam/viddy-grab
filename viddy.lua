@@ -109,7 +109,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       if string.match(url, "viddy%.com/media/") then
         local newurl = string.gsub(url, "viddy%.com/media/", "viddy%.com/video/")
         if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
-          table.indert(urls, { url=newurl })
+          table.insert(urls, { url=newurl })
           addedtolist[newurl] = true
         end
       end
@@ -180,7 +180,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           end
         end
       end
-      for customurlnf in string.gmatch(html, '"(/[^"]+)"') do
+      for customurlnf in string.gmatch(html, '"(/[^/][^"]+)"') do
         if string.match(customurlnf, "/[^/]+/v/")
           or string.match(customurlnf, "/[^/]+/m/")
           or string.match(customurlnf, "/resources/")
@@ -223,7 +223,7 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
     end
   end
   
-  if string.match(url["url"], "http[s]://viddy%.it/") then
+  if string.match(url["url"], "http[s]://viddy%.it/") or string.match(url["url"], "http[s]?://www%.viddy%.it/") then
     return wget.actions.EXIT
   elseif status_code >= 500 or
     (status_code >= 400 and status_code ~= 404 and status_code ~= 403) then
