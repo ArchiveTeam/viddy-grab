@@ -101,8 +101,9 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       html = read_file(html)
       
       for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
-        if (string.match(customurl, item_url1) and string.match(customurl, item_url2)) or (string.match(customurl, item_url1) and string.match(customurl, item_url2) and string.match(customurl, item_url3))
-          or string.match(customurl, "viddy%.it")
+        io.stdout:write("url "..customurl.." is through '' 1.  \n")
+        io.stdout:flush()
+        if string.match(customurl, "viddy%.it")
           or string.match(customurl, "viddy%.com/[^/]+/v/")
           or string.match(customurl, "viddy%.com/[^/]+/m/")
           or string.match(customurl, "use%.typekit%.com")
@@ -121,7 +122,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurl, "/static/")
           or string.match(customurl, "/media/")
           or string.match(customurl, "/ajax/") then
-          io.stdout:write("url "..url.." is through ''.  \n")
+          io.stdout:write("url "..customurl.." is through ''.  \n")
           io.stdout:flush()
           if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
             table.insert(urls, { url=customurl })
@@ -135,8 +136,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         end
       end
       for customurlnf in string.gmatch(html, '"//([^"]+)"') do
-        if (string.match(customurlnf, item_url1) and string.match(customurlnf, item_url2)) or (string.match(customurlnf, item_url1) and string.match(customurlnf, item_url2) and string.match(customurlnf, item_url3))
-          or string.match(customurlnf, "viddy%.it")
+        if string.match(customurlnf, "viddy%.it")
           or string.match(customurlnf, "viddy%.com/[^/]+/v/")
           or string.match(customurlnf, "viddy%.com/[^/]+/m/")
           or string.match(customurlnf, "use%.typekit%.com")
@@ -155,7 +155,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurlnf, "/static/")
           or string.match(customurlnf, "/media/")
           or string.match(customurlnf, "/ajax/") then
-          io.stdout:write("url "..url.." is through //.  \n")
+          io.stdout:write("url "..customurlnf.." is through //.  \n")
           io.stdout:flush()
           local base = "http://"
           local customurl = base..customurlnf
@@ -171,8 +171,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         end
       end
       for customurlnf in string.gmatch(html, '"(/[^"]+)"') do
-        if (string.match(customurlnf, item_url1) and string.match(customurlnf, item_url2)) or (string.match(customurlnf, item_url1) and string.match(customurlnf, item_url2) and string.match(customurlnf, item_url3))
-          or string.match(customurlnf, "/[^/]+/v/")
+        if string.match(customurlnf, "/[^/]+/v/")
           or string.match(customurlnf, "/[^/]+/m/")
           or string.match(customurlnf, "/resources/")
           or string.match(customurlnf, "/images/")
@@ -180,7 +179,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurlnf, "/static/")
           or string.match(customurlnf, "/media/")
           or string.match(customurlnf, "/ajax/") then
-          io.stdout:write("url "..url.." is through ().  \n")
+          io.stdout:write("url "..customurlnf.." is through ().  \n")
           io.stdout:flush()
           local base = "http://www.viddy.com"
           local customurl = base..customurlnf
