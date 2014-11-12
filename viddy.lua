@@ -100,6 +100,9 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       
       html = read_file(file)
       
+      io.stdout:write("Url "..url.." is being checked for extracting links.  \n")
+      io.stdout:flush()
+      
       for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
         if string.match(customurl, "viddy%.it")
           or string.match(customurl, "viddy%.com/[^/]+/v/")
