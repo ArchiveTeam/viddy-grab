@@ -13,6 +13,65 @@ local item_url3 = os.getenv('item_url3')
 local downloaded = {}
 local addedtolist = {}
 
+--exclude all the following urls:
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/favicon2.ico"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/mobile-icons/144x144.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/mobile-icons/114x114.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/mobile-icons/72x72.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/mobile-icons/57x57.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/mobile-icons/320x460.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/mobile-icons/640x920.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/mobile-icons/640x1096.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/mobile-icons/768x1004.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/mobile-icons/748x1024.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/mobile-icons/748x1024.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/mobile-icons/1536x2008.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/mobile-icons/1496x2048.png"] = true
+downloaded["http://www.viddy.com/static/css/font/vagroundedstd.css?v=goodbye"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/min/base.css?v=goodbye"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/min/mid.css?v=goodbye"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/min/large.css?v=goodbye"] = true
+downloaded["http://www.viddy.com/resources/index?v=goodbye&lang=None.js"] = true
+downloaded["http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/js/extra/json2.js?v=goodbye%3E%3C/script%3E%3C![endif]--%3E%0A%09%3Clink%20href="] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/js/extra/html5shiv.js?v=goodbye"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/mobile-icons/144x144-ms.png"] = true
+downloaded["http://www.viddy.com/static/css/font/VAGRoundedStd-Light.otf"] = true
+downloaded["http://www.viddy.com/static/css/font/VAGRoundedStd-Thin.otf"] = true
+downloaded["http://www.viddy.com/static/css/font/VAGRoundedStd-Bold.otf"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/loading.gif"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/home-phone.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/video-loading-background.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/white-heart.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/comment.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/play.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/black-heart.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/red-heart.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/white-dots.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/black-dots.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/jagged-edge.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/jagged-edge-up.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/no-flash.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/facebook-logo.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/twitter-logo.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/push-off.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/email-off.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/push-on.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/email-on.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/check-off.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/check-on.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/toggle-off.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/toggle-on.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/download.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/dropbox.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/processing.gif"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/postroll-overlay.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/img/postroll-phone.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/appstore-badge.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/googleplay-badge.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/postroll-phone.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/postroll-overlay.png"] = true
+
 load_json_file = function(file)
   if file then
     local f = io.open(file)
