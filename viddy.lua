@@ -177,6 +177,22 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         end
       end
       
+      if string.match(url, "viddy.com/[^/]+/m/") then
+        local newurl = string.gsub(url, "/m/", "/v/")
+        if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
+          table.insert(urls, { url=newurl })
+          addedtolist[newurl] = true
+        end
+      end
+      
+      if string.match(url, "viddy.com/[^/]+/v/") then
+        local newurl = string.gsub(url, "/v/", "/m/")
+        if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
+          table.insert(urls, { url=newurl })
+          addedtolist[newurl] = true
+        end
+      end
+      
       for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
         if string.match(customurl, "viddy%.it")
           or string.match(customurl, "viddy%.com/[^/]+/v/")
