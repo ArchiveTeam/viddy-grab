@@ -200,6 +200,10 @@ class WgetArgs(object):
             item_url1, item_url2 = item_value.split(':', 1)
             item_url3 = "not_used"
             wget_args.append('http://www.viddy.com/{0}/{1}'.format(item_url1, item_url2))
+            wget_args.append('http://www.viddy.com/v1/media/{0}'.format(item_url2))
+            wget_args.append('http://www.viddy.com/v1/media/{0}/comments'.format(item_url2))
+            wget_args.append('http://www.viddy.com/v1/media/{0}/likes'.format(item_url2))
+            wget_args.append('http://www.viddy.com/v1/media/{0}/tags'.format(item_url2))
             item['item_url1'] = item_url1
             item['item_url2'] = item_url2
             item['item_url3'] = item_url3
