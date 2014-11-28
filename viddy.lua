@@ -187,7 +187,10 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       or string.match(url, "%.com/video/")
       or string.match(url, "%.com/[^/]+/m/")
       or string.match(url, "%.com/[^/]+/v/"))
-      and not string.match(url, "http[s]?://cdn%.viddy%.com/") then
+      and not (string.match(url, "http[s]?://cdn%.viddy%.com/")
+      or string.match(url, item_url2.."/comments")
+      or string.match(url, item_url2.."/likes")
+      or string.match(url, item_url2.."/tags")) then
       
       html = read_file(file)
       
