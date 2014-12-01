@@ -71,6 +71,7 @@ downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/appstore-badge.png
 downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/googleplay-badge.png"] = true
 downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/postroll-phone.png"] = true
 downloaded["http://awspy-c15m.viddy-assets.com/static/css/img/postroll-overlay.png"] = true
+downloaded["http://awspy-c15m.viddy-assets.com/static/js/extra/json2.js?v=goodbye%3E%3C/script%3E%3C![endif]--%3E%0A%09%3Clink%20href="] = true
 
 load_json_file = function(file)
   if file then
