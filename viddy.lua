@@ -279,8 +279,8 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
                 addedtolist[newurl] = true
               end
             end
-          elseif string.match(customurl, "http[s]?://www%.viddy%.it/") then
-            local newurl = string.gsub(customurl, "www%.viddy%.it", "viddy%.it")
+          elseif string.match(customurl, "/www%.viddy%.it/") then
+            local newurl = string.gsub(customurl, "/www%.viddy%.it", "/viddy%.it")
             if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
               table.insert(urls, { url=newurl })
               addedtolist[newurl] = true
@@ -336,8 +336,8 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
               table.insert(urls, { url=newurl })
               addedtolist[newurl] = true
             end
-          elseif string.match(customurl, "http[s]?://www%.viddy%.it/") then
-            local newurl = string.gsub(customurl, "www%.viddy%.it", "viddy%.it")
+          elseif string.match(customurl, "/www%.viddy%.it/") then
+            local newurl = string.gsub(customurl, "/www%.viddy%.it", "/viddy%.it")
             if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
               table.insert(urls, { url=newurl })
               addedtolist[newurl] = true
