@@ -216,7 +216,7 @@ class WgetArgs(object):
         elif item_type == 'user':
             wget_args.append('http://www.viddy.com/v1/users/{0}/following'.format(item_value))
             wget_args.append('http://www.viddy.com/v1/users/{0}/followers'.format(item_value))
-            wget_args.append('http://www.viddy.com/v1/users/users/{0}'.format(item_value))
+            wget_args.append('http://www.viddy.com/v1/users/{0}'.format(item_value))
             wget_args.append('http://www.viddy.com/v1/users/{0}/media'.format(item_value))
             wget_args.append('http://www.viddy.com/v1/media/{0}/favorite  '.format(item_value))
             item['item_url1'] = item['item_url2'] = item['item_url3'] = 'nope'
