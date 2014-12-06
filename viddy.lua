@@ -160,7 +160,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
   local html = nil
   
 --  if string.match(url, "%-high") and string.match(url, "%.mp4") then
---    local newurl = string.gsub(url, "%-high", "%-medium")
+--    local newurl = string.gsub(url, "%-high", "-medium")
 --    if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
 --      table.insert(urls, { url=newurl })
 --      addedtolist[newurl] = true
@@ -168,7 +168,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
 --  end
   
 --  if string.match(url, "%-medium") and string.match(url, "%.mp4") then
---    local newurl = string.gsub(url, "%-medium", "%-low")
+--    local newurl = string.gsub(url, "%-medium", "-low")
 --    if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
 --      table.insert(urls, { url=newurl })
 --      addedtolist[newurl] = true
@@ -176,7 +176,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
 --  end
   
 --  if string.match(url, "%-low") and string.match(url, "%.mp4") then
---    local newurl = string.gsub(url, "%-low", "%-high")
+--    local newurl = string.gsub(url, "%-low", "-high")
 --    if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
 --      table.insert(urls, { url=newurl })
 --      addedtolist[newurl] = true
@@ -211,7 +211,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       io.stdout:flush()
       
       if string.match(url, "viddy%.com/media/") then
-        local newurl = string.gsub(url, "viddy%.com/media/", "viddy%.com/video/")
+        local newurl = string.gsub(url, "viddy%.com/media/", "viddy.com/video/")
         if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
           table.insert(urls, { url=newurl })
           addedtolist[newurl] = true
@@ -219,7 +219,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       end
       
       if string.match(url, "viddy%.com/video/") then
-        local newurl = string.gsub(url, "viddy%.com/video/", "viddy%.com/media/")
+        local newurl = string.gsub(url, "viddy%.com/video/", "viddy.com/media/")
         if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
           table.insert(urls, { url=newurl })
           addedtolist[newurl] = true
@@ -264,7 +264,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurl, "/video/")
           or string.match(customurl, "/ajax/") then
           if string.match(customurl, "%-medium") and string.match(customurl, "%.mp4") then
-            local newurl = string.gsub(customurl, "%-medium", "%-high")
+            local newurl = string.gsub(customurl, "%-medium", "-high")
             if string.match(newurl, "https://") then
               local newnewurl = string.gsub(newurl, "https://", "http://")
               if downloaded[newnewurl] ~= true and addedtolist[newnewurl] ~= true then
@@ -278,7 +278,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
               end
             end
           elseif string.match(customurl, "%-low") and string.match(customurl, "%.mp4") then
-            local newurl = string.gsub(customurl, "%-low", "%-high")
+            local newurl = string.gsub(customurl, "%-low", "-high")
             if string.match(newurl, "https://") then
               local newnewurl = string.gsub(newurl, "https://", "http://")
               if downloaded[newnewurl] ~= true and addedtolist[newnewurl] ~= true then
@@ -292,7 +292,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
               end
             end
           elseif string.match(customurl, "/www%.viddy%.it/") then
-            local newurl = string.gsub(customurl, "/www%.viddy%.it", "/viddy%.it")
+            local newurl = string.gsub(customurl, "/www%.viddy%.it", "/viddy.it")
             if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
               table.insert(urls, { url=newurl })
               addedtolist[newurl] = true
@@ -337,19 +337,19 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           local base = "http://"
           local customurl = base..customurlnf
           if string.match(customurl, "%-medium") and string.match(customurl, "%.mp4") then
-            local newurl = string.gsub(customurl, "%-medium", "%-high")
+            local newurl = string.gsub(customurl, "%-medium", "-high")
             if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
               table.insert(urls, { url=newurl })
               addedtolist[newurl] = true
             end
           elseif string.match(customurl, "%-low") and string.match(customurl, "%.mp4") then
-            local newurl = string.gsub(customurl, "%-low", "%-high")
+            local newurl = string.gsub(customurl, "%-low", "-high")
             if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
               table.insert(urls, { url=newurl })
               addedtolist[newurl] = true
             end
           elseif string.match(customurl, "/www%.viddy%.it/") then
-            local newurl = string.gsub(customurl, "/www%.viddy%.it", "/viddy%.it")
+            local newurl = string.gsub(customurl, "/www%.viddy%.it", "/viddy.it")
             if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
               table.insert(urls, { url=newurl })
               addedtolist[newurl] = true
@@ -375,12 +375,12 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           local base = "http://www.viddy.com"
           local customurl = base..customurlnf
           if string.match(customurl, "%-medium") and string.match(customurl, "%.mp4") then
-            local newurl = string.gsub(customurl, "%-medium", "%-high")
+            local newurl = string.gsub(customurl, "%-medium", "-high")
             if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
               table.insert(urls, { url=newurl })
             end
           elseif string.match(customurl, "%-low") and string.match(customurl, "%.mp4") then
-            local newurl = string.gsub(customurl, "%-low", "%-high")
+            local newurl = string.gsub(customurl, "%-low", "-high")
           if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
               table.insert(urls, { url=newurl })
             end
