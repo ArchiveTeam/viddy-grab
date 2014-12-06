@@ -182,6 +182,18 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
 --      addedtolist[newurl] = true
 --    end
 --  end
+  if item_type == 'user' then
+    if string.match(url, "http://www.viddy.com/v1/users/") and not string.match(url, "http://www.viddy.com/v1/users/[^/]+/") then
+      html = read_file(file)
+      for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
+        if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
+          table.insert(urls, { url=customurl })
+          addedtolist[customurl] = true
+        end
+      end
+    end
+  end
+  
   
   if item_type == "viddyvideo2" or item_type == "viddyvideo3" then
     if (string.match(url, "%.com/media/")
