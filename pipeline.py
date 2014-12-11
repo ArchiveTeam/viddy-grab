@@ -218,7 +218,7 @@ class WgetArgs(object):
             wget_args.append('http://www.viddy.com/v1/users/{0}/followers'.format(item_value))
             wget_args.append('http://www.viddy.com/v1/users/{0}'.format(item_value))
             wget_args.append('http://www.viddy.com/v1/users/{0}/media'.format(item_value))
-            wget_args.append('http://www.viddy.com/v1/media/{0}/favorite  '.format(item_value))
+            wget_args.append('http://www.viddy.com/v1/media/{0}/favorite'.format(item_value))
             item['item_url1'] = item['item_url2'] = item['item_url3'] = 'nope'
         else:
             raise Exception('Unknown item')
