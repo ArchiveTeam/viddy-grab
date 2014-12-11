@@ -419,7 +419,7 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
   
   if item_type == 'user' and status_code == 302 then
     return wget.actions.EXIT
-  else if string.match(url["url"], "http[s]://viddy%.it/") or string.match(url["url"], "http[s]?://www%.viddy%.it/") then
+  elseif string.match(url["url"], "http[s]://viddy%.it/") or string.match(url["url"], "http[s]?://www%.viddy%.it/") then
     return wget.actions.EXIT
   elseif status_code >= 500 or
     (status_code >= 400 and status_code ~= 404 and status_code ~= 403) then
