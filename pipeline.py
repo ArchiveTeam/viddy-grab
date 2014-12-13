@@ -178,7 +178,7 @@ class WgetArgs(object):
             "--page-requisites",
             "--timeout", "30",
             "--tries", "inf",
-            "--domains", "viddy.com,viddy.tv",
+            "--domains", "viddy.com,viddy.tv,ep1c.com",
             "--span-hosts",
             "--waitretry", "30",
             "--warc-file", ItemInterpolation("%(item_dir)s/%(warc_file_base)s"),
