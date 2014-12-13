@@ -194,7 +194,7 @@ class WgetArgs(object):
         item['item_type'] = item_type
         item['item_value'] = item_value
         
-        assert item_type in ('viddyvideo2', 'viddyvideo3', 'user')
+        assert item_type in ('viddyvideo2', 'viddyvideo3', 'user', 'ep1cvideo2')
         
         if item_type == 'viddyvideo2':
             item_url1, item_url2 = item_value.split(':', 1)
