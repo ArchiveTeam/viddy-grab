@@ -13,7 +13,28 @@ local item_url3 = os.getenv('item_url3')
 local downloaded = {}
 local addedtolist = {}
 
---exclude all the following urls:
+-- exclude all the following urls:
+-- ep1c:
+downloaded["http://ep1c.com/static/css/vagroundedstd.css?v=goodbye1"] = true
+downloaded["http://ep1c.com/static/css/epic.css?v=goodbye1"] = true
+downloaded["http://ep1c.com/static/img/favicon.ico"] = true
+downloaded["http://ep1c.com/static/js/jquery.zclip.js?v=goodbye1"] = true
+downloaded["http://ep1c.com/static/js/epic.js?v=goodbye1"] = true
+downloaded["http://ep1c.com/static/css/VAGRoundedStd-Light.otf"] = true
+downloaded["http://ep1c.com/static/css/VAGRoundedStd-Thin.otf"] = true
+downloaded["http://ep1c.com/static/css/VAGRoundedStd-Bold.otf"] = true
+downloaded["http://ep1c.com/static/img/copied.png"] = true
+downloaded["http://ep1c.com/static/img/app-store.png"] = true
+downloaded["http://ep1c.com/static/img/epic-logo.png"] = true
+downloaded["http://ep1c.com/static/img/home-phone.png"] = true
+downloaded["http://ep1c.com/static/img/download.png"] = true
+downloaded["http://ep1c.com/static/img/dropbox.png"] = true
+downloaded["http://ep1c.com/static/img/processing.gif"] = true
+downloaded["http://www.viddy.com/content/contact"] = true
+downloaded["http://www.viddy.com/legal/terms"] = true
+downloaded["http://www.viddy.com/static/img/santa-monica.jpg"] = true
+downloaded["http://www.viddy.com/legal/privacy"] = true
+-- viddy:
 downloaded["http://awspy-c15m.viddy-assets.com/static/img/favicon2.ico"] = true
 downloaded["http://awspy-c15m.viddy-assets.com/static/img/mobile-icons/144x144.png"] = true
 downloaded["http://awspy-c15m.viddy-assets.com/static/img/mobile-icons/114x114.png"] = true
