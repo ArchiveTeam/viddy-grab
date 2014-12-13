@@ -220,6 +220,13 @@ class WgetArgs(object):
             wget_args.append('http://www.viddy.com/v1/users/{0}/media'.format(item_value))
             wget_args.append('http://www.viddy.com/v1/media/{0}/favorite'.format(item_value))
             item['item_url1'] = item['item_url2'] = item['item_url3'] = 'nope'
+        elif item_type == 'ep1cvideo2':
+            item_url1, item_url2 = item_value.split(':', 1)
+            item_url3 = "not_used"
+            wget_args.append('http://ep1c.com/{0}/{1}'.format(item_url1, item_url2))
+            item['item_url1'] = item_url1
+            item['item_url2'] = item_url2
+            item['item_url3'] = item_url3
         else:
             raise Exception('Unknown item')
         
