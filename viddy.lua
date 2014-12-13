@@ -111,6 +111,33 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
     newurl = url
   end
   
+  if item_type == "ep1cvideo2" and (downloaded[newurl] ~= true or addedtolist[newurl] ~= true) then
+    if string.match(url, "viddy%.com/[^/]+/[0-9a-zA-Z]+")
+      or string.match(url, "cdn%.ep1c%.com")
+      or string.match(url, "ep1c%.com/static/swf/")
+      or string.match(url, "viddy%.com/[^/]+/[vm]/[0-9a-zA-Z]+")
+      or string.match(url, "ep1c%.com/e/")
+      or string.match(url, "ep1c%.com/v/")
+      or string.match(url, "ep1c%.com/video/")
+      or string.match(url, "viddy%.it")
+      or string.match(url, "ep1c%.com/[0-9a-zA-Z]+[^/]") then
+      if not (string.match(url, "%-medium") or string.match(url, "%-low")) then
+        if string.match(url, "https://") then
+          newurl = string.gsub(url, "https://", "http://")
+          addedtolist[newurl] = true
+          return true
+        elseif string.match(url, "http://") then
+          addedtolist[url] = true
+          return true
+        end
+      else
+        return false
+      end
+    else
+      return false
+    end
+  end
+  
   if (item_type == "viddyvideo2" or item_type == "viddyvideo3") and (downloaded[newurl] ~= true or addedtolist[newurl] ~= true) then
     if (item_type == "viddyvideo2" and string.match(url, "viddy%.com/media/"..item_url2))
       or (item_type == "viddyvideo2" and string.match(url, "viddy%.com/video/"..item_url2))
@@ -189,6 +216,77 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
           table.insert(urls, { url=customurl })
           addedtolist[customurl] = true
+        end
+      end
+    end
+  end
+  
+  if item_type == "ep1cvideo2" then
+    if string.match(url, "http[s]?://www%.ep1c%.com/video/.+[^/]")
+      or string.match(url, "http[s]?://www%.ep1c%.com/v/.+[^/]")
+      or string.match(url, "http[s]?://www%.ep1c%.com/e/.+[^/]")
+      or string.match(url, "http[s]?://ep1c%.com/v/.+[^/]")
+      or string.match(url, "http[s]?://ep1c%.com/e/.+[^/]")
+      or string.match(url, "http[s]?://ep1c%.com/video/.+[^/]")then
+      
+      html = read_file(file)
+      
+      for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
+        if string.match(customurl, "viddy%.com/[^/]+/[0-9a-zA-Z]+")
+          or string.match(customurl, "cdn%.ep1c%.com")
+          or string.match(customurl, "ep1c%.com/static/swf/")
+          or string.match(customurl, "viddy%.com/[^/]+/[vm]/[0-9a-zA-Z]+")
+          or string.match(customurl, "ep1c%.com/e/")
+          or string.match(customurl, "viddy%.it")
+          or string.match(customurl, "ep1c%.com/[0-9a-zA-Z]+[^/]") then
+          if string.match(customurl, "%-medium") and string.match(customurl, "%.mp4") then
+            local newurl = string.gsub(customurl, "%-medium", "-high")
+            if string.match(newurl, "https://") then
+              local newnewurl = string.gsub(newurl, "https://", "http://")
+              if downloaded[newnewurl] ~= true and addedtolist[newnewurl] ~= true then
+                table.insert(urls, { url=newurl })
+                addedtolist[newnewurl] = true
+              end
+            elseif string.match(newurl, "http://") then
+              if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
+                table.insert(urls, { url=newurl })
+                addedtolist[newurl] = true
+              end
+            end
+          elseif string.match(customurl, "%-low") and string.match(customurl, "%.mp4") then
+            local newurl = string.gsub(customurl, "%-low", "-high")
+            if string.match(newurl, "https://") then
+              local newnewurl = string.gsub(newurl, "https://", "http://")
+              if downloaded[newnewurl] ~= true and addedtolist[newnewurl] ~= true then
+                table.insert(urls, { url=newurl })
+                addedtolist[newnewurl] = true
+              end
+            elseif string.match(newurl, "http://") then
+              if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
+                table.insert(urls, { url=newurl })
+                addedtolist[newurl] = true
+              end
+            end
+          elseif string.match(customurl, "/www%.viddy%.it/") then
+            local newurl = string.gsub(customurl, "/www%.viddy%.it", "/viddy.it")
+            if downloaded[newurl] ~= true and addedtolist[newurl] ~= true then
+              table.insert(urls, { url=newurl })
+              addedtolist[newurl] = true
+            end
+          elseif not (string.match(customurl, "%-low") and string.match(customurl, "%-medium") and string.match(customurl, "http[s]?://www%.viddy%.it/")) then
+            if string.match(customurl, "https://") then
+              local newcustomurl = string.gsub(customurl, "https://", "http://")
+              if downloaded[newcustomurl] ~= true and addedtolist[newcustomurl] ~= true then
+                table.insert(urls, { url=newcustomurl })
+                addedtolist[customurl] = true
+              end
+            elseif string.match(customurl, "http://") then
+              if downloaded[customurl] ~= true and addedtolist[customurl] ~= true then
+                table.insert(urls, { url=customurl })
+                addedtolist[customurl] = true
+              end
+            end
+          end
         end
       end
     end
