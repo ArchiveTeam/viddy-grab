@@ -116,6 +116,12 @@ read_file = function(file)
   end
 end
 
+wget.callbacks.lookup_host = function(host)
+  if host == "www.viddy.com" or host == "viddy.com" then
+    return "54.88.216.245"
+  end
+end
+
 wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_parsed, iri, verdict, reason)
   local url = urlpos["url"]["url"]
   local html = urlpos["link_expect_html"]
